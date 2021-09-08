@@ -1,0 +1,9 @@
+<h3><%= @application.name %></h3>
+<% @application.pets.each do |pet| %>
+  <section id="pet-<%= pet.id %>">
+    <%= pet.name %><br>
+    <% if @application.app_pet(pet.id).status != "Approved" %>
+      <%= button_to "Approve", "/admin/applications/#{@application.id}?pet_id=#{pet.id}", method: :patch %>
+    <% end %>
+  </section>
+<% end %>
