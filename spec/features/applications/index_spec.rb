@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Applications index page' do
+RSpec.describe 'Applications index page', type: :feature do
   before(:each) do
     @shelter = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
     @shelter_2 = Shelter.create!(name: 'Boulder shelter', city: 'Boulder, CO', foster_program: false, rank: 9)

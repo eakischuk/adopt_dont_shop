@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Applications new page' do
+RSpec.describe 'Applications new page', type: :feature do
   it 'creates new application' do
     visit "/applications/new"
 
