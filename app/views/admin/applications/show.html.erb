@@ -2,10 +2,13 @@
 <% @application.pets.each do |pet| %>
   <section id="pet-<%= pet.id %>">
     <%= pet.name %><br>
-    <% if @application.app_pet(pet.id).status != "Approved" %>
-      <%= button_to "Approve", "/admin/applications/#{@application.id}?pet_id=#{pet.id}", method: :patch %>
+    <% if @application.app_pet(pet.id).status != "Approved" && @application.app_pet(pet.id).status != "Rejected" %>
+      <%= button_to "Approve", "/admin/applications/#{@application.id}?pet_id=#{pet.id}&status=Approved", method: :patch %>
+      <%= button_to "Reject", "/admin/applications/#{@application.id}?pet_id=#{pet.id}&status=Rejected", method: :patch %>
     <% elsif @application.app_pet(pet.id).status == "Approved" %>
       <p>Approved</p>
+    <% elsif @application.app_pet(pet.id).status == "Rejected" %>
+      <p>Rejected</p>
     <% end %>
   </section>
 <% end %>
