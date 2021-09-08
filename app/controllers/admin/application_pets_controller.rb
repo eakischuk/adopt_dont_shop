@@ -5,6 +5,6 @@ class Admin::ApplicationPetsController < ApplicationController
       status: "Approved"
       })
       app_pet.save
-    redirect_to "/admin/applications/#{params[:app_id]}?app_pets_id=#{app_pet.id}"
+    redirect_to "/admin/applications/#{params[:app_id]}"
   end
 end
