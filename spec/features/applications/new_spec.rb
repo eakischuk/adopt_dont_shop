@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Applications new page' do
+RSpec.describe 'Applications new page', type: :feature do
   it 'creates new application' do
     visit "/applications/new"
 
@@ -23,7 +23,10 @@ RSpec.describe 'Applications new page' do
 
     click_on "Submit"
 
-    expect(page).to have_content("Application not created: Required information missing.")
+    expect(current_path).to eq("/applications/new")
+    within("#flash-message") do
+      expect(page).to have_content("Application not created: Required information missing.")
+    end
     expect(page).to have_button("Submit")
   end
 end
