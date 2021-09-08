@@ -4,6 +4,8 @@
     <%= pet.name %><br>
     <% if @application.app_pet(pet.id).status != "Approved" %>
       <%= button_to "Approve", "/admin/applications/#{@application.id}?pet_id=#{pet.id}", method: :patch %>
+    <% elsif @application.app_pet(pet.id).status == "Approved" %>
+      <p>Approved</p>
     <% end %>
   </section>
 <% end %>
