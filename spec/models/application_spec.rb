@@ -26,5 +26,11 @@ RSpec.describe Application, type: :model do
       @app_1.pets << @pet_2
       expect(@app_1.pet_count).to eq(2)
     end
+
+    it 'finds application pets' do
+      @app_1.pets << @pet_1
+
+      expect(@app_1.app_pet(@pet_1.id)).to be_an(ApplicationPet)
+    end
   end
 end
