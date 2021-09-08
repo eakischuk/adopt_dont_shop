@@ -23,6 +23,7 @@ RSpec.describe 'Applications new page', type: :feature do
 
     click_on "Submit"
 
+    expect(current_path).to eq("/applications/new")
     expect(page).to have_content("Application not created: Required information missing.")
     expect(page).to have_button("Submit")
   end
