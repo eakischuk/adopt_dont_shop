@@ -76,6 +76,38 @@ RSpec.describe 'Admin applications show page' do
     within("#pet-#{@pet_2.id}") do
       expect(page).to_not have_button("Reject")
       expect(page).to have_content("Rejected")
-    end    
+    end
+  end
+
+  it 'only updates one app at a time' do
+    @app_1.pets << @pet_1
+    @app_1.pets << @pet_2
+    @app_2.pets << @pet_1
+    @app_2.pets << @pet_2
+
+    visit "/admin/applications/#{@app_1.id}"
+
+    within("#pet-#{@pet_2.id}") do
+      expect(page).to have_button("Reject")
+      click_on "Reject"
+    end
+    within("#pet-#{@pet_2.id}") do
+      expect(page).to_not have_button("Reject")
+      expect(page).to have_content("Rejected")
+      expect(page).to_not have_button("Accept")
+      expect(page).to_not have_content("Accepted")
+    end
+
+    visit "/admin/applications/#{@app_2.id}"
+
+    within("#pet-#{@pet_1.id}") do
+      expect(page).to have_button("Approve")
+      expect(page).to have_button("Reject")
+    end
+
+    within("#pet-#{@pet_2.id}") do
+      expect(page).to have_button("Approve")
+      expect(page).to have_button("Reject")
+    end
   end
 end
